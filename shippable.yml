@@ -12,9 +12,6 @@ before_script:
 - chmod +x ./gradlew
 
 build:
-  cache: true
-  cache_dir_list:
-  - $HOME/.gradle/
 
   pre_ci_boot:
   - echo "PRE-CI"
