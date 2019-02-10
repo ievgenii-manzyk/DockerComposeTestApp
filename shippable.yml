@@ -2,3 +2,14 @@ language: java
 
 jdk:
 - oraclejdk8
+
+before_script:
+- chmod +x ./gradlew
+
+branches:
+  only:
+  - master
+
+build:
+  ci:
+    ./gradlew clean build
