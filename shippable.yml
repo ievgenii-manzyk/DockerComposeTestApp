@@ -19,8 +19,3 @@ build:
 
   ci:
   - echo "Starting CI"
-
-  integrations:
-    hub:
-    - integrationName: DockerHub
-      type: dockerRegistryLogin
