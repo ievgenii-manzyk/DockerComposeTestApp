@@ -32,7 +32,7 @@ build:
     - chmod +x /usr/local/bin/docker-compose
    # - sudo docker-compose up --build
     - docker build -t myapp .
-    - docker run --net=host -p 8080:8080 myapp
+    - docker run --net=host -p -d 8080:8080 myapp
     - sleep 20
     - curl localhost:8080
     - docker-compose down
