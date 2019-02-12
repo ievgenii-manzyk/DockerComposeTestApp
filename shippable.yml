@@ -10,7 +10,7 @@ branches:
 
 build:
   pre_ci_boot:
-    options: "-v /tmp:/tmp"
+    options: "-v /tmp:/tmp --net=host"
 
   ci:
   # Ubuntu 18.04 and various Docker images such as openjdk:8-jdk throw exceptions when Java applications use SSL and HTTPS,
@@ -25,6 +25,6 @@ build:
     - curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     - chmod +x /usr/local/bin/docker-compose
     - sudo docker-compose up --build --detach
-    - sleep 5
+    - sleep 20
     - curl localhost:8080
     - docker-compose down
