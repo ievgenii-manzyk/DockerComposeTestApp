@@ -1,6 +1,9 @@
 language: java
 jdk: openjdk8
 
+services:
+  - postgres
+
 before_script:
 - chmod +x ./gradlew
 
@@ -13,6 +16,10 @@ build:
     options: "-v /tmp:/tmp --net=host"
 
   ci:
+  - psql -c 'create database students;' -U postgres
+  - psql -c "create user test_user with encrypted password 'AbcHlibaXce';" -U postgres
+  - psql -c 'grant all privileges on database students to test_user;' -U postgres
+
   # Ubuntu 18.04 and various Docker images such as openjdk:8-jdk throw exceptions when Java applications use SSL and HTTPS,
   # because Java 9 changed a file format, if you create that file from scratch, like Debian / Ubuntu do.
   # 1. Save an empty JKS file with the default 'changeit' password for Java cacerts.

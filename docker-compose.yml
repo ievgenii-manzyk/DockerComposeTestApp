@@ -1,18 +1,8 @@
 version: '2'
 services:
-  mypostgres:
-    image: postgres
-    ports:
-    - "5432:5432"
-    environment:
-    - POSTGRES_PASSWORD=root
-    - POSTGRES_USER=postgres
-    - POSTGRES_DB=students
   web:
     build: .
     ports:
     - "8080:8080"
-    depends_on:
-    - mypostgres
     volumes:
     - /tmp:/tmp
