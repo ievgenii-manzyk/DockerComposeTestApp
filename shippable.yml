@@ -26,4 +26,5 @@ build:
     - chmod +x /usr/local/bin/docker-compose
     - sudo docker-compose up --build
     - sleep 5
+    - curl localhost:8080
     - docker-compose down
