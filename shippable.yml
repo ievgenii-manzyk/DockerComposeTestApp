@@ -1,8 +1,13 @@
 language: java
 jdk: openjdk8
 
+env:
+  global:
+  - SHIPPABLE_POSTGRES_VERSION="9.4"
+  - SHIPPABLE_POSTGRES_CMD="sudo -u postgres /usr/lib/postgresql/9.4/bin/postgres -c config_file=/etc/postgresql/9.4/main/postgresql.conf -c listen_addresses '*'"
+
 services:
-  - postgres
+- postgres
 
 before_script:
 - chmod +x ./gradlew
