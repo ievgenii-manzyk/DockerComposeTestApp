@@ -3,6 +3,8 @@ package com.manzyk.app.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -13,19 +15,17 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="student_mst", schema = "public")
+@Table(name="student", schema = "public")
 public class Student {
 
     @Transient
     private final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int rollNo;
     String name;
     Date dateOfBirth;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "student")
-    private Set<Course> courses;
 
     public int getRollNo() {
         return rollNo;
@@ -56,11 +56,12 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Set<Course> getCourses() {
-        return this.courses;
-    }
-
-    public void setCourses(Set<Course> courses) {
-      this.courses = courses;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "rollNo=" + rollNo +
+                ", name='" + name + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                '}';
     }
 }

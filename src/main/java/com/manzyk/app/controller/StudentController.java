@@ -1,7 +1,6 @@
 package com.manzyk.app.controller;
 
 import com.manzyk.app.service.StudentService;
-import com.manzyk.app.domain.Course;
 import com.manzyk.app.domain.Student;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,30 +56,6 @@ class StudentController {
       ModelAndView modelAndView = new ModelAndView("course");
       modelAndView.addObject("student", studentService.getStudent(studentId));
       return modelAndView;
-    }
-
-    @PostMapping("/students/{studentId}/courses")
-    @ResponseStatus(value = HttpStatus.OK)
-    ModelAndView addCourse(@PathVariable Integer studentId,
-                            @RequestParam String name,
-                            @RequestParam String grade ) throws Exception {
-
-        ModelAndView modelAndView = new ModelAndView("course");
-        Student student = studentService.getStudent(studentId);
-        try {
-          Course course = new Course();
-          course.setStudent(student);
-          course.setName(name);
-          course.setGrade(Integer.parseInt(grade));
-          student.getCourses().add(course);
-          student = studentService.addStudent(student);
-          modelAndView.addObject("message", "Course added with name: " + course.getName());
-        }
-        catch (Exception ex){
-          modelAndView.addObject("message", "Failed to add course: " + ex.getMessage());
-        }
-        modelAndView.addObject("student", student);
-        return modelAndView;
     }
 
 }
